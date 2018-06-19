@@ -1,17 +1,17 @@
 ---
 
 - file:
-    path: "{{ user_scripts_dir }}"
+    path: "{{ scripts_dir }}"
     state: directory
 
 - name: Download Amazon CloudWatch Monitoring Scripts
-  get_url: url=https://aws-cloudwatch.s3.amazonaws.com/downloads/CloudWatchMonitoringScripts-1.2.2.zip dest={{ user_scripts_dir }}/CloudWatchMonitoringScripts-1.2.2.zip
+  get_url: url=https://aws-cloudwatch.s3.amazonaws.com/downloads/CloudWatchMonitoringScripts-1.2.2.zip dest={{ scripts_dir }}/CloudWatchMonitoringScripts-1.2.2.zip
 
 - name: Unarchive zip
   unarchive:
-    src: "{{ user_scripts_dir  }}/CloudWatchMonitoringScripts-1.2.2.zip"
-    dest: "{{ user_scripts_dir  }}"
+    src: "{{ scripts_dir  }}/CloudWatchMonitoringScripts-1.2.2.zip"
+    dest: "{{ scripts_dir  }}"
     remote_src: True
 
 - name: Delete zip file
-  file: path={{ user_scripts_dir }}/CloudWatchMonitoringScripts-1.2.2.zip state=absent
+  file: path={{ scripts_dir }}/CloudWatchMonitoringScripts-1.2.2.zip state=absent

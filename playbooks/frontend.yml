@@ -1,7 +1,8 @@
 ---
 - hosts: frontend:frontend_staging
   vars:
-    scripts_dir: /home/ec2-user/scripts
+    user_scripts_dir: /home/ec2-user/scripts
+    monitoring_scripts_dir: "{{ user_scripts_dir }}/aws-scripts-mon"
   become: yes
   become_method: sudo
   remote_user: ec2-user
@@ -25,11 +26,11 @@
         - unzip
         - curl
 
-    - stat: path={{ scripts_dir }}
-      register: scripts_dir_check
+    - stat: "path={{ monitoring_scripts_dir }}"
+      register: monitoring_scripts_dir_check
 
     - name: Setup Amazon CloudWatch Memory Monitoring Script
       import_tasks: '../tasks/cloudwatch_memory_monitoring.yml'
       vars:
-        user_scripts_dir: "{{ scripts_dir }}"
-      when: scripts_dir_check.stat.exists == False
+        scripts_dir: "{{ monitoring_scripts_dir }}"
+      when: monitoring_scripts_dir_check.stat.exists == False
