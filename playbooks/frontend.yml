@@ -32,5 +32,14 @@
     - name: Setup Amazon CloudWatch Memory Monitoring Script
       import_tasks: '../tasks/cloudwatch_memory_monitoring.yml'
       vars:
-        scripts_dir: "{{ monitoring_scripts_dir }}"
+        scripts_dir: "{{ user_scripts_dir }}"
       when: monitoring_scripts_dir_check.stat.exists == False
+
+    - cron:
+        name: Report Memory Metrics
+        cron_file: /etc/crontab
+        minute: "*"
+        hour: "*"
+        day: "*"
+        user: root
+        job: "{{ monitoring_scripts_dir }}/mon-put-instance-data.pl --mem-used --from-cron --mem-avail --swap-used --mem-used-incl-cache-buff"
