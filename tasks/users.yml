@@ -1,0 +1,13 @@
+- debug:
+    msg: "Setting up user - {{ user }}"
+
+- name: Set up users
+  user:
+    name: '{{ user }}'
+    shell: /bin/bash
+
+- name: Set up multiple authorized keys
+  authorized_key:
+    user: '{{ user }}'
+    state: present
+    key: "{{ lookup('file', 'public_keys/{{ user }}') }}"
