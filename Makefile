@@ -1,7 +1,7 @@
 aws_profile = govwifi
 
 check-env:
-	$(if ${INVENTORY},,$(error Must pass INVENTORY=<name>))
+	$(if ${INVENTORY},,$(error Please specify your target environment))
 
 staging-london-frontend:
 	$(eval export INVENTORY=frontend_staging)
