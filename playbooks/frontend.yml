@@ -60,3 +60,16 @@
         day: "*"
         user: root
         job: "run-parts /etc/cron.daily"
+
+    - name: User Setup
+      include_tasks: '../tasks/users.yml'
+      vars:
+        user: "{{ item }}"
+      with_items:
+        - adrianclay
+        - emileswarts
+        - eugenen
+        - marko
+        - mohamedh
+        - ryanmacg
+        - zahids
