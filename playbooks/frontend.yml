@@ -1,0 +1,25 @@
+---
+
+- hosts: frontend:frontend_staging
+  become: yes
+  become_method: sudo
+  remote_user: ec2-user
+
+  tasks:
+    - name: Install packages
+      yum:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - perl-Switch
+        - perl-DateTime
+        - perl-Sys-Syslog
+        - perl-LWP-Protocol-https
+        - perl-Digest-SHA
+        - perl-URI
+        - perl-libwww-perl
+        - perl-MIME-tools
+        - perl-Crypt-SSLeay
+        - perl-XML-LibXML
+        - unzip
+        - curl
