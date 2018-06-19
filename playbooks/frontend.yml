@@ -43,3 +43,20 @@
         day: "*"
         user: root
         job: "{{ monitoring_scripts_dir }}/mon-put-instance-data.pl --mem-used --from-cron --mem-avail --swap-used --mem-used-incl-cache-buff"
+
+    - name: Create security-updates script for cron.daily
+      copy:
+        src: ./scripts/security-updates
+        dest: /etc/cron.daily
+        owner: root
+        group: root
+        mode: 0755
+
+    - cron:
+        name: Run Daily Cron
+        cron_file: /etc/crontab
+        minute: "12"
+        hour: "{{ groups['frontend'].index(inventory_hostname) + 2 }}"
+        day: "*"
+        user: root
+        job: "run-parts /etc/cron.daily"
