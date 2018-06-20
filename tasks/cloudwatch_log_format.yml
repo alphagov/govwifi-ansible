@@ -11,9 +11,9 @@
 - name: Ensure awslogs directory exists
   file: path=/etc/awslogs state=directory
 
-- name: Configure AWSLogs
+- name: Copy awslogs config template to server
   template:
-    src: ./files/awslogs.conf
+    src: ./templates/awslogs.conf
     dest: /etc/awslogs/awslogs.conf
     owner: root
     group: root

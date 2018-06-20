@@ -97,3 +97,9 @@
       vars:
         env: "{{ ansible_env }}"
       when: aws_logs_config_check.stat.exists == False
+
+    - name: Start awslogs agent
+      service:
+        name: awslogs
+        state: started
+        enabled: yes
