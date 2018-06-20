@@ -4,6 +4,7 @@
     ansible_env: "{{ lookup('env', 'ANSIBLE_ENV') }}"
     user_scripts_dir: /home/ec2-user/scripts
     monitoring_scripts_dir: "{{ user_scripts_dir }}/aws-scripts-mon"
+    aws_region: "{{ lookup('env', 'AWS_REGION') }}"
 
   become: yes
   become_method: sudo
@@ -128,3 +129,17 @@
         name: awslogs
         state: started
         enabled: yes
+
+    - stat: path=/etc/awslogs/awscli.conf
+      register: aws_cli_check
+
+    - name: Configure the AWS CLI
+      template:
+        src: ./templates/awscli.conf
+        dest: /etc/awslogs/awscli.conf
+        owner: root
+        group: root
+        mode: 0644
+      vars:
+        region: "{{ aws_region }}"
+      when: aws_cli_check.stat.exists == False
