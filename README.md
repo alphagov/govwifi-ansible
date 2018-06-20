@@ -11,7 +11,8 @@ This will ensure that the servers are correctly configured to run GovWifi.
 aws_access_key_id = XXXYYY
 aws_secret_access_key = super-secret-key
 ```
-  - Populate the `inventory` file with IP addresses for the servers that you are provisioning under the relevant categories.
+  - Populate an `inventory` file with IP addresses of the servers that you are provisioning under the relevant categories.
+  You can find an example of this in `inventory.sample`.
 ```
 [frontend_staging_dublin]
 xx.xx.xx.xx
