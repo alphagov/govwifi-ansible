@@ -4,10 +4,12 @@ check-env:
 	$(if ${INVENTORY},,$(error Please specify your target environment))
 
 staging-london-frontend:
+	$(eval export ANSIBLE_ENV=staging)
 	$(eval export INVENTORY=frontend_staging)
 	$(eval export AWS_REGION=eu-west-2)
 
 staging-dublin-frontend:
+	$(eval export ANSIBLE_ENV=staging) # for production this will be wifi
 	$(eval export INVENTORY=frontend_staging)
 	$(eval export AWS_REGION=eu-west-1)
 

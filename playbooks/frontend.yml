@@ -73,3 +73,14 @@
         - mohamedh
         - ryanmacg
         - zahids
+
+    - name: Ensure /etc/ecs directory exists
+      file: path=/etc/ecs state=directory
+
+    - name: ECS Cluster Registration
+      copy:
+        dest: /etc/ecs/ecs.config
+        content: "ECS_CLUSTER={{ lookup('env', 'ANSIBLE_ENV') }}-frontend-cluster"
+        owner: root
+        group: root
+        mode: 0644
