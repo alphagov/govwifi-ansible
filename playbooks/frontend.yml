@@ -1,5 +1,5 @@
 ---
-- hosts: frontend_staging_london:frontend_staging_dublin
+- hosts: frontend_staging_london:frontend_staging_dublin:frontend_production_london:frontend_production_dublin
   vars:
     ansible_env: "{{ lookup('env', 'ANSIBLE_ENV') }}"
     user_scripts_dir: /home/ec2-user/scripts

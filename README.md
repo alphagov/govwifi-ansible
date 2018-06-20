@@ -13,7 +13,7 @@ aws_secret_access_key = super-secret-key
 ```
   - Populate the `inventory` file with IP addresses for the servers that you are provisioning under the relevant categories.
 ```
-[frontend_staging]
+[frontend_staging_dublin]
 xx.xx.xx.xx
 xx.xx.xx.xx
 ```
@@ -33,6 +33,10 @@ Host xxx.xxx.xxx.xxx
 ## Run
 ### London
 `make staging-london-frontend provision`
+or
+`make production-london-frontend provision`
 
 ### Dublin
 `make staging-dublin-frontend provision`
+or
+`make production-dublin-frontend provision`
