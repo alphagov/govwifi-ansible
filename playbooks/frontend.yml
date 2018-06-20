@@ -130,3 +130,14 @@
         mode: 0644
       vars:
         region: "{{ aws_region }}"
+
+    - name: Ensure Latest ECS Agent
+      yum:
+        name: ecs-init
+        state: latest
+
+    - name: Install Security Updates
+      yum:
+        name: '*'
+        security: yes
+        state: latest
