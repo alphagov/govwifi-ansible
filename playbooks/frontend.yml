@@ -39,6 +39,22 @@
         scripts_dir: "{{ user_scripts_dir }}"
       when: monitoring_scripts_dir_check.stat.exists == False
 
+    - cronvar:
+        name: SHELL
+        value: /bin/bash
+
+    - cronvar:
+        name: PATH
+        value: /sbin:/bin:/usr/sbin:/usr/bin
+
+    - cronvar:
+        name: MAILTO
+        value: root
+
+    - cronvar:
+        name: HOME
+        value: /
+
     - cron:
         name: Report Memory Metrics
         cron_file: /etc/crontab
