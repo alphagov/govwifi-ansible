@@ -25,6 +25,8 @@
         - perl-XML-LibXML
         - unzip
         - curl
+        - awslogs
+        - jq
 
     - stat: "path={{ monitoring_scripts_dir }}"
       register: monitoring_scripts_dir_check
