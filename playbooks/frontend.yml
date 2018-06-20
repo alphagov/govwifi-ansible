@@ -73,6 +73,15 @@
         mode: 0755
 
     - cron:
+        name: Run Hourly Cron
+        cron_file: /etc/crontab
+        minute: "42"
+        hour: "*"
+        day: "*"
+        user: root
+        job: "run-parts /etc/cron.hourly"
+
+    - cron:
         name: Run Daily Cron
         cron_file: /etc/crontab
         minute: "12"
