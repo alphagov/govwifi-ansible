@@ -1,0 +1,24 @@
+---
+
+- name: Get the ECS Cluster name
+  shell: curl -s http://localhost:51678/v1/metadata | jq -r '. | .Cluster'
+  register: ecs_cluster_name
+
+- name: Get Container Instance Id
+  shell: curl -s http://localhost:51678/v1/metadata | jq -r '. | .ContainerInstanceArn' | awk -F/ '{print $2}'
+  register: ecs_container_instance_id
+
+- name: Ensure awslogs directory exists
+  file: path=/etc/awslogs state=directory
+
+- name: Copy awslogs config template to server
+  template:
+    src: ./templates/awslogs.conf
+    dest: /etc/awslogs/awslogs.conf
+    owner: root
+    group: root
+    mode: 0644
+  vars:
+    env: "{{ ansible_env }}"
+    cluster_name: "{{ ecs_cluster_name.stdout }}"
+    container_instance_id: "{{ ecs_container_instance_id.stdout }}"
