@@ -104,34 +104,22 @@
         - ryanmacg
         - zahids
 
-    - name: Ensure /etc/ecs directory exists
-      file: path=/etc/ecs state=directory
-
-    - name: ECS Cluster Registration
-      copy:
-        dest: /etc/ecs/ecs.config
-        content: "ECS_CLUSTER={{ ansible_env }}-frontend-cluster"
-        owner: root
-        group: root
-        mode: 0644
-
-    - stat: path=/etc/awslogs/awslogs.conf
-      register: aws_logs_config_check
-
     - name: Setup Amazon CloudWatch Memory Monitoring Script
       import_tasks: '../tasks/cloudwatch_log_format.yml'
       vars:
         env: "{{ ansible_env }}"
-      when: aws_logs_config_check.stat.exists == False
+
+    - name: Start ecs
+      service:
+        name: ecs
+        state: started
+        enabled: yes
 
     - name: Start awslogs agent
       service:
         name: awslogs
         state: started
         enabled: yes
-
-    - stat: path=/etc/awslogs/awscli.conf
-      register: aws_cli_check
 
     - name: Configure the AWS CLI
       template:
@@ -142,4 +130,3 @@
         mode: 0644
       vars:
         region: "{{ aws_region }}"
-      when: aws_cli_check.stat.exists == False
