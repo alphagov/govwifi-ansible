@@ -1,10 +1,11 @@
 ---
-- hosts: frontend:frontend_staging
+- hosts: frontend_staging_london:frontend_staging_dublin
   vars:
     ansible_env: "{{ lookup('env', 'ANSIBLE_ENV') }}"
     user_scripts_dir: /home/ec2-user/scripts
     monitoring_scripts_dir: "{{ user_scripts_dir }}/aws-scripts-mon"
     aws_region: "{{ lookup('env', 'AWS_REGION') }}"
+    inventory: "{{ lookup('env', 'INVENTORY') }}"
 
   become: yes
   become_method: sudo
@@ -86,7 +87,7 @@
         name: Run Daily Cron
         cron_file: /etc/crontab
         minute: "12"
-        hour: "{{ groups['frontend'].index(inventory_hostname) + 2 }}"
+        hour: "{{ groups[inventory].index(inventory_hostname) + 2 }}"
         day: "*"
         user: root
         job: "run-parts /etc/cron.daily"
