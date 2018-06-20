@@ -5,12 +5,12 @@ check-env:
 
 staging-london-frontend:
 	$(eval export ANSIBLE_ENV=staging)
-	$(eval export INVENTORY=frontend_staging)
+	$(eval export INVENTORY=frontend_staging_london)
 	$(eval export AWS_REGION=eu-west-2)
 
 staging-dublin-frontend:
 	$(eval export ANSIBLE_ENV=staging) # for production this will be wifi
-	$(eval export INVENTORY=frontend_staging)
+	$(eval export INVENTORY=frontend_staging_dublin)
 	$(eval export AWS_REGION=eu-west-1)
 
 provision: check-env
