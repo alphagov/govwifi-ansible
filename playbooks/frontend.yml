@@ -150,3 +150,8 @@
         name: '*'
         security: yes
         state: latest
+
+    - name: Ensure Anacron is disabled by making the binary non executable
+      file:
+        path: /usr/sbin/anacron
+        mode: 0644
