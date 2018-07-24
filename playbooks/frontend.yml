@@ -6,6 +6,8 @@
     monitoring_scripts_dir: "{{ user_scripts_dir }}/aws-scripts-mon"
     aws_region: "{{ lookup('env', 'AWS_REGION') }}"
     inventory: "{{ lookup('env', 'INVENTORY') }}"
+  roles:
+    - role: geerlingguy.ruby
 
   become: yes
   become_method: sudo
