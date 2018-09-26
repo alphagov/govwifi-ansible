@@ -95,7 +95,7 @@
         name: Run Daily Cron
         cron_file: /etc/crontab
         minute: "12"
-        hour: "{{ groups[inventory].index(inventory_hostname) + 2 }}"
+        hour: "{{ 20 + groups[inventory].index(inventory_hostname) }}"
         day: "*"
         user: root
         job: "run-parts /etc/cron.daily"
