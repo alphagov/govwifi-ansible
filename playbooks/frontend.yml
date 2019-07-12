@@ -112,6 +112,8 @@
         - mohamedh
         - ryanmacg
         - zahids
+      tags:
+         - users
 
     - name: Setup Amazon CloudWatch Memory Monitoring Script
       import_tasks: '../tasks/cloudwatch_log_format.yml'
