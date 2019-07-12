@@ -29,4 +29,5 @@ provision: check-env
 	ANSIBLE_HOST_KEY_CHECKING=false \
 	ansible-playbook -i inventory \
 		playbooks/frontend.yml \
-		--limit $(INVENTORY)
+		--limit $(INVENTORY) \
+		$(if $(TAGS),--tags "$(TAGS)",)
