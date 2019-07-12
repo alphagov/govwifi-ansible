@@ -5,9 +5,13 @@
   user:
     name: '{{ user }}'
     shell: /bin/bash
+    remove: yes
+    state: absent
+    force: yes
+  tags:
+    - users
 
 - name: Set up multiple authorized keys
   authorized_key:
     user: '{{ user }}'
-    state: present
     key: "{{ lookup('file', 'public_keys/{{ user }}') }}"
